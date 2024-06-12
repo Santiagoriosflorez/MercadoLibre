@@ -18,7 +18,7 @@ return new class extends Migration
 			$table->bigInteger('category_id')->unsigned();
 			$table->string('name');
 			$table->text('description');
-			$table->decimal('worth');
+			$table->decimal('worth' , 8,3);
 			$table->integer('stock');
             $table->timestamps();
             $table->softDeletes();

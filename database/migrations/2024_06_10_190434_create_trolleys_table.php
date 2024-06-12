@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('trolleys', function (Blueprint $table) {
             $table->id();
-			$table->integer('id_trolley')->unsigned();
-			$table->bigInteger('user_id')->unsigned();
+			$table->bigInteger('user_id')->unsigned()->unique();
             $table->timestamps();
             $table->softDeletes();
 
 
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

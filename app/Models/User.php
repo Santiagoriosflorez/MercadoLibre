@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,8 +14,8 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
     protected $fillable = [
         'name',
-        'email',
 		'last_name',
+        'email',
         'password',
     ];
 
@@ -24,12 +24,25 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	protected $casts = [
+		'created_at' => 'datetime:Y-m-d',
+		'updated_at' => 'datetime:Y-m-d'
+	];
+
+	public function setPasswordAttribute($value)
+	{
+		$this->attributes['password'] = bcrypt($value);
+	}
+
+	public function setRememberTokenAttribute()
+	{
+		$this->attributes['remember_token'] =  Str::random(30);
+	}
+
+
+
+    public function trolley()
+	{
+		return $this->hasOne(Trolley::class, 'user_id', 'id');
+	}
 }

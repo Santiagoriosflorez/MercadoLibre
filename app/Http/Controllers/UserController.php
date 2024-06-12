@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\User\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         //
     }
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = new User($request->all());
 		$user->save();
@@ -36,12 +36,16 @@ class UserController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->update($request->all());
+		if(!$request->ajax()) return back()->with('success','User updated');
+		return response()->json([],204);
     }
-    public function destroy($id)
+    public function destroy(Request $request, User $user)
     {
-        //
+		$user->delete($request->all());
+		if(!$request->ajax()) return back()->with('success','User deleted');
+		return response()->json([],204);
     }
 }

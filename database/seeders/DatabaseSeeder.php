@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\CategorySeeder;
-use Database\Seeders\ProductSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
 		$this->call([
 			UserSeeder::class,
 			CategorySeeder::class,
-			ProductSeeder::class,
 		]);
 		User::Factory(10)->create();
+		Product::Factory(10)->create();
 	}
 }

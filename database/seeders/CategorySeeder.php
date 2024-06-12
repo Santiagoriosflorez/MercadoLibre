@@ -11,5 +11,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::create(['name'=>'CalzadoDeportivo']);
+        Category::create(['name'=>'RopaDeportiva']);
+        Category::create(['name'=>'AccesoriosDeportivos']);
     }
 }

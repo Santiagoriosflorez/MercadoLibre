@@ -1,17 +1,29 @@
 <x-app title="Tienda De Ropa | Home">
 
-    <section class="d-flex flex-wrap justify-content-center">
-        @foreach ($products as $product)
-            <div class="card mx-2 my-3 card_size">
+    <section class="d-flex flex-column">
+        @foreach ($categories as $category)
+            <div class="card mx-2 my-4">
                 <div class="card-header">
-                    <h2 class="h5">{{ $product->name }}</h2>
+                    <h2 class="h4">{{ $category->name }}</h2>
                 </div>
-				<div class="card-body">
-					<p>Category: {{ $product->category ? $product->category->name : 'No Category' }}</p> <!-- Verifica si la categoría existe -->
-					<p>{{$product->description}}</p>
-					<p>$: {{$product->worth}}</p>
-					<p>{{$product->stock}}</p>
-				</div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach ($products as $product)
+                            <div class="col-sm-4 mb-3">
+                                <div class="card-item">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">{{ $product->description }}</li>
+                                            <li class="list-group-item">Precio ${{ $product->worth }}</li>
+                                            <li class="list-group-item">Stock: {{ $product->stock }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         @endforeach
     </section>

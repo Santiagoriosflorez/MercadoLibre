@@ -30,6 +30,12 @@ class User extends Authenticatable
 		'updated_at' => 'datetime:Y-m-d'
 	];
 
+	public function getFullNameAttribute()
+	{
+		return "{$this->name} {$this->last_name}";
+	}
+
+
 	public function setPasswordAttribute($value)
 	{
 		$this->attributes['password'] = bcrypt($value);

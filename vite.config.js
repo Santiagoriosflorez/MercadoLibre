@@ -23,7 +23,8 @@ export default defineConfig({
 		alias: {
 			vue: 'vue/dist/vue.esm-bundler.js',
 			'@': path.resolve(__dirname, 'resources/js'),
-			'~': path.resolve(__dirname, 'node_modules')
+			'~': path.resolve(__dirname, 'node_modules'),
+			'~@fortawesome': path.resolve(__dirname, 'node_modules/@fortawesome'),
 		}
 	}
 })

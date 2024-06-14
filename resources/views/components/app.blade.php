@@ -11,7 +11,6 @@
 	{{-- Title --}}
     <title>{{ env('APP_NAME') }} | {{ $title ?? 'Store' }}</title>
 
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

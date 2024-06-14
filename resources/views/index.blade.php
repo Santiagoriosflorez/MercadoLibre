@@ -18,6 +18,10 @@
                                             <li class="list-group-item">Precio ${{ $product->worth }}</li>
                                             <li class="list-group-item">Stock: {{ $product->stock }}</li>
                                         </ul>
+                                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success">Añadir al carrito</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

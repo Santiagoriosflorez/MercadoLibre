@@ -30,36 +30,37 @@
                             <a class="nav-link" href="{{ route('register') }}">Registro</a>
                         </li>
                     @endif
-                	@if (Route::has('register'))
+                    @if (Route::has('cart.index'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Categories</a>
+                            <a class="nav-link" href="{{ route('cart.index')}}">Carrito</a>
                         </li>
                     @endif
                 @else
-				<li class="nav-item dropdown">
-					<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-						{{ Auth::user()->full_name }}
-					</a>
-
-					<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                        {{-- Logout --}}
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesion
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->full_name }}
                         </a>
 
-                        {{-- Category Products --}}
-                        <a class="dropdown-item" href="/category-products/index">Category Products</a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                            {{-- Logout --}}
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar
+                                Sesion
+                            </a>
+
+                            {{-- Category Products --}}
+                            <a class="dropdown-item" href="/category-products/index">Category Products</a>
 
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-					</div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
 
 
-				</li>
+                    </li>
                 @endguest
             </ul>
         </div>

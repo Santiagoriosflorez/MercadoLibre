@@ -27,9 +27,8 @@ class MenuController extends Controller
     }
     public function store(Request $request)
     {
-
+      //
     }
-
 
     public function show( Request $request,)
     {

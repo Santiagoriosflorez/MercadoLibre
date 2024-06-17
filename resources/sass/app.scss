@@ -19,6 +19,33 @@
 
 /**  LOGIN   */
 
+.title {
+	font-size: 1.5rem;
+    position: relative;
+    color: red;
+    top: 40%;
+    text-align: center;
+    z-index: 1;
+}
+
+.content {
+	position: absolute;
+	background: linear-gradient(180deg, #7fd481 4.49%, #f4e83f 39.89%);
+	width: 437px;
+	height: 676px;
+	left: 40.4%;
+}
+
+.body{
+	padding-top: 40%;
+    background-color: white;
+    top: 24.6%;
+    position: relative;
+    border-top-left-radius: 46%;
+    border-top-right-radius: 44%;
+    max-height: 72%;
+}
+
 .custom {
 	height: 300px;
 }

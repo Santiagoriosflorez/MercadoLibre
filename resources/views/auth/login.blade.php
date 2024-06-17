@@ -2,13 +2,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-7">
-                <div class="card">
-                    <div class="card-header">Inicio de sesion</div>
+                <div class="card content">
+                    <div class="title">Bienvenido</div>
 
-                    <div class="card-body">
+                    <div class="card-body body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-
                             <div class="row mb-2 justify-content-center">
                                 <div class="col-md-7">
                                     <input id="email" type="email"

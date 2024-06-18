@@ -32,7 +32,7 @@
                     @endif
                     @if (Route::has('cart.index'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart.index')}}">Carrito</a>
+                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
                         </li>
                     @endif
                 @else
@@ -44,15 +44,25 @@
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
+                            @role('admin')
+                                {{-- User --}}
+                                <a class="dropdown-item" href="{{ route('users.index') }}">
+                                    Usuarios
+                                </a>
+                            @endrole
+
+                            @role('admin')
+                                {{-- Category and product --}}
+                            <a class="dropdown-item" href="{{ route('category.index') }}">
+                                    Categoria y Productos
+                                </a>
+                            @endrole
+
                             {{-- Logout --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar
                                 Sesion
                             </a>
-
-                            {{-- Category Products --}}
-                            <a class="dropdown-item" href="/category-products/index">Category Products</a>
-
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

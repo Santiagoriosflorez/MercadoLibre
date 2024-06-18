@@ -8,7 +8,7 @@ class CategoryController extends Controller
 {
 	public function index(Request $request)
     {
-
+		//
     }
     public function create()
     {

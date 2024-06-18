@@ -5,12 +5,19 @@
 
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100; 1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Datatable
+@import '~/datatables.net-bs5/css/dataTables.bootstrap5.min';
+
+// Vue select
+@import 'vue-select/dist/vue-select.css';
 
 .fa-solid {
 	width: 10px;
@@ -20,12 +27,24 @@
 /**  LOGIN   */
 
 .title {
+	font-family: 'Agbalumo', system-ui;
+	font-weight: 400;
+	font-style: normal;
 	font-size: 1.5rem;
-    position: relative;
-    color: red;
-    top: 40%;
-    text-align: center;
-    z-index: 1;
+	position: relative;
+	color: rgb(0, 0, 0);
+	top: 40%;
+	text-align: center;
+	z-index: 1;
+}
+.img {
+	background-color: #000000;
+	margin: 10px;
+	border-radius: 100%;
+	border: 2px solid #ffffff;
+	position: absolute;
+	width: 200px;
+	left: 110px;
 }
 
 .content {
@@ -33,24 +52,65 @@
 	background: linear-gradient(180deg, #7fd481 4.49%, #f4e83f 39.89%);
 	width: 437px;
 	height: 676px;
-	left: 40.4%;
+	left: 35.4%;
 }
 
-.body{
+.body {
 	padding-top: 40%;
-    background-color: white;
-    top: 24.6%;
-    position: relative;
-    border-top-left-radius: 46%;
-    border-top-right-radius: 44%;
-    max-height: 72%;
+	background-color: white;
+	top: 24.6%;
+	position: relative;
+	border-top-left-radius: 46%;
+	border-top-right-radius: 44%;
+	max-height: 69.6%;
 }
 
+.email {
+	position: absolute;
+	top: 20%;
+	width: 20px;
+	height: 20px;
+	pointer-events: none;
+}
+
+.key {
+	position: absolute;
+	top: 20%;
+	width: 20px;
+	height: 20px;
+	pointer-events: none;
+}
+
+.input-container {
+	position: relative;
+}
+
+.input-container i {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 10px;
+	pointer-events: none; /* Asegura que el ícono no bloquee los clics en el input */
+}
+
+.input-container input {
+	padding-left: 40px; /* Ajusta este valor para proporcionar espacio para el ícono */
+}
+
+.input-container input:focus + i {
+	display: none;
+}
 .custom {
 	height: 300px;
 }
 .form-control {
+	background-color: #dbdbdb;
+	display: flex;
+	margin: 0 -17px;
+	width: 120%;
+	border-radius: 20px;
 	padding: 10px;
+	margin-bottom: 20px;
 }
 
 .card_size {

@@ -3,17 +3,21 @@
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <div class="card content">
-                    <div class="title">Bienvenido</div>
+                    <div>
+                        <img class="img" src="{{ Vite::asset('resources/images/Avatar.png') }}" alt="Oval Image">
+                    </div>
+                    <div class="title"><strong>!Bienvenido</strong></div>
 
                     <div class="card-body body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="row mb-2 justify-content-center">
-                                <div class="col-md-7">
+                                <div class="col-md-7 input-container">
+                                    <i class="fa-solid fa-envelope email" style="color: #000000;"></i>
                                     <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        class="form-control @error('email') is-invalid @enderror " name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus
-                                        placeholder="Correo Electronico">
+                                        placeholder="hola@sitioincreible.com">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -25,7 +29,8 @@
 
                             <div class="row mb-4 justify-content-center">
 
-                                <div class="col-md-7">
+                                <div class="col-md-7 input-container">
+                                    <i class="fa-solid fa-key key" style="color: #000000;"></i>
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="current-password" placeholder="Contraseña">

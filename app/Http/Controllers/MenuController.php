@@ -9,42 +9,39 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index(Request $request)
-    {
-		$category_id = [1, 2, 3];
+	public function index(Request $request)
+	{
+		$category_ids = [1, 2];
 
-		$products= Product::with('category')->whereHas('category', function ($query) use ($category_id) {
-			$query->where('id', $category_id);
-		})->get();
+		$categories = Category::whereIn('id', $category_ids)->get();
 
-		$categories= Category::all();
-
-		return view ('index', compact('products','categories'));
-    }
-    public function create()
-    {
-        //
-    }
-    public function store(Request $request)
-    {
-      //
-    }
-
-    public function show( Request $request,)
-    {
-
-    }
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request)
-    {
-
-    }
-    public function destroy(Request $request)
-    {
+		$categories->each(function ($category) {
+			$category->products = $category->products()->take(4)->get();
+		});
+		return view('index', compact('categories'));
+	}
+	public function create()
+	{
 		//
-    }
+	}
+	public function store(Request $request)
+	{
+		//
+	}
+
+	public function show(Request $request,)
+	{
+	}
+	public function edit($id)
+	{
+		//
+	}
+
+	public function update(Request $request)
+	{
+	}
+	public function destroy(Request $request)
+	{
+		//
+	}
 }

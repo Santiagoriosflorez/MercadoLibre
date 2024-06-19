@@ -20,6 +20,7 @@ return new class extends Migration
 			$table->text('description');
 			$table->decimal('worth' , 8,3);
 			$table->integer('stock');
+			$table->string('url_imagen');
             $table->timestamps();
             $table->softDeletes();
 

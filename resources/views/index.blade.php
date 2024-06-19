@@ -5,11 +5,13 @@
             <div class="card mx-2 my-4">
                 <div class="card-header">
                     <h2 class="h4">{{ $category->name }}</h2>
+                    <a href="{{ route('product.page') }}">Ir a mas Productos</a>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        @foreach ($products as $product)
-                            <div class="col-sm-4 mb-3">
+                        @foreach ($category->products as $product)
+                            <div class="col-sm-6 col-lg-3 mb-2">
+                                <img class="image" src="{{ $product->url_imagen }}" alt="{{ $product->name }}">
                                 <div class="card-item">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $product->name }}</h5>
@@ -18,10 +20,6 @@
                                             <li class="list-group-item">Precio ${{ $product->worth }}</li>
                                             <li class="list-group-item">Stock: {{ $product->stock }}</li>
                                         </ul>
-                                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-success">Añadir al carrito</button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

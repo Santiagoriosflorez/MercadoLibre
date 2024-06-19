@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductController;
@@ -15,6 +16,11 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+//Product
+Route::group(['prefix' => 'product'], function () {
+	Route::get('/page', [ProductController::class, 'page'])->name('product.page');
+	Route::get('/{id}', [ProductController::class, 'show'])->name('product.products');
+});
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -33,10 +39,11 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::get('/', [TrolleyController::class, 'index'])->name('cart.index');
 		Route::post('/create', [TrolleyController::class, 'create'])->name('cart.create');
 		Route::post('/add/{product_id}', [TrolleyController::class, 'addToCart'])->name('cart.add');
+		Route::put('/item/{id}', [TrolleyController::class, 'update'])->name('cart.update');
 	});
 
 	//Product and Category
-	Route::group(['prefix' => 'category','controller' => ProductController::class], function () {
+	Route::group(['prefix' => 'category', 'controller' => CategoryController::class], function () {
 		Route::get('/', 'index')->name('category.index');
 		Route::get('/create', 'create')->name('category.create')->middleware('can:category.create');
 		Route::post('/', 'store')->name('category.store')->middleware('can:category.store');

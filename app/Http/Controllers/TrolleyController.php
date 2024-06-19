@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\shopping_cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Trolley;
 use Illuminate\Http\Request;
@@ -13,9 +14,8 @@ class TrolleyController extends Controller
 	{
 		$user = Auth::user();
 		$trolley = $user->trolley;
-		$cartItems = $trolley ? $trolley->shopping_cart : [];
-
-		return view('cart.index', compact('trolley', 'cartItems'));
+		$cartItems = $trolley ? $trolley->shopping_cart()->with('product')->get() : [];
+		return view('cart.index', compact('cartItems'));
 	}
 
 	public function create(Request $request)
@@ -62,6 +62,12 @@ class TrolleyController extends Controller
 				]);
 			}
 
+			$cartItem->subtotal= $cartItem->stock * $cartItem->worth;
+			$cartItem->save();
+
+			$trolley->total = $trolley->shopping_cart->sum('subtotal');
+			$trolley->save();
+
 			return redirect(route('cart.index'));
 		} catch (\Exception $e) {
 			return response()->json(['message' => 'Error al agregar producto al carrito'], 500);
@@ -88,6 +94,29 @@ class TrolleyController extends Controller
 			return response()->json(['message' => 'Producto no encontrado en el carrito'], 404);
 		} catch (\Exception $e) {
 			return response()->json(['message' => 'Error al eliminar producto del carrito'], 500);
+		}
+	}
+
+	public function update(Request $request, $id)
+	{
+		try {
+			// Obtener el carrito del usuario autenticado
+			$trolley = $request->user()->trolley;
+
+			// Buscar el elemento del carrito específico por su ID
+			$cartItem = $trolley->shopping_cart()->where('id', $id)->first();
+
+			if ($cartItem) {
+				// Actualizar el stock del elemento del carrito
+				$cartItem->stock = $request->input('stock'); // Asumiendo que 'stock' es el campo que quieres actualizar
+				$cartItem->save();
+
+				return response()->json(['message' => 'Producto actualizado en el carrito'], 200);
+			}
+
+			return response()->json(['message' => 'Producto no encontrado en el carrito'], 404);
+		} catch (\Exception $e) {
+			return response()->json(['message' => 'Error al actualizar producto en el carrito', 'error' => $e->getMessage()], 500);
 		}
 	}
 }

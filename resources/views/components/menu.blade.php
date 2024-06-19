@@ -19,9 +19,28 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
+
+                    @if (Route::has('product.page'))
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Categoria
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('product.page') }}">Calzado Deportivo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('product.page') }}">Ropa Deportivo</a>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+
+
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Inicio de sesion</a>
+                            <a class="nav-link dropdown-togle" href="{{ route('login') }}">Iniciar Sesion</a>
                         </li>
                     @endif
 
@@ -32,7 +51,8 @@
                     @endif
                     @if (Route::has('cart.index'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i></a>
+                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping fa-lg"
+                                    style="color: #000000;"></i></a>
                         </li>
                     @endif
                 @else
@@ -53,7 +73,7 @@
 
                             @role('admin')
                                 {{-- Category and product --}}
-                            <a class="dropdown-item" href="{{ route('category.index') }}">
+                                <a class="dropdown-item" href="{{ route('category.index') }}">
                                     Categoria y Productos
                                 </a>
                             @endrole

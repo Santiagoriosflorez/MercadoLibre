@@ -20,6 +20,7 @@ class RoleAndPermissionSeeder extends Seeder
 			'users.index',
 			'users.create',
 			'users.store',
+			'users.edit',
 			'users.update',
 			'users.destroy',
 		], $permissionsShore);

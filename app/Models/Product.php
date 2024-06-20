@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Models\File;
 use App\Models\shopping_cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +31,10 @@ class Product extends Model
 	public function shopping_cart()
 	{
 		return $this->hasMany(shopping_cart::class, 'product_id','id');
+	}
+
+	public function  file()
+	{
+		return $this->morphOne(File::class, 'fileable');
 	}
 }

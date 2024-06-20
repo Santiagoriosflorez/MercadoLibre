@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\shopping_cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Trolley;
 use Illuminate\Http\Request;
@@ -33,46 +32,46 @@ class TrolleyController extends Controller
 	}
 
 	public function addToCart(Request $request, $product_id)
-	{
-		$user = Auth::user();
-		$trolley = $user->trolley;
+{
+    $user = Auth::user();
+    $trolley = $user->trolley;
 
-		if (!$trolley) {
-			// Si no hay carrito, crear uno
-			$this->create($request);
-			$trolley = $user->trolley;
-		}
+    if (!$trolley) {
+        // Si no hay carrito, crear uno
+        $this->create($request);
+        $trolley = $user->trolley;
+    }
 
-		try {
-			// Buscar el producto usando su ID
-			$product = Product::findOrFail($product_id);
+    try {
+        // Buscar el producto usando su ID
+        $product = Product::findOrFail($product_id);
 
-			// Verificar si el producto ya está en el carrito
-			$cartItem = $trolley->shopping_cart()->where('product_id', $product_id)->first();
+        // Verificar si el producto ya está en el carrito
+        $cartItem = $trolley->shopping_cart()->where('product_id', $product_id)->first();
 
-			if ($cartItem) {
-				// Incrementar la cantidad si ya está en el carrito
-				$cartItem->stock += 1;
-				$cartItem->save();
-			} else {
-				// Crear un nuevo elemento de carrito si no está en el carrito
-				$trolley->shopping_cart()->create([
-					'product_id' => $product_id,
-					'stock' => 1
-				]);
-			}
+        if ($cartItem) {
+            // Incrementar la cantidad si ya está en el carrito
+            $cartItem->stock += 1;
+            $cartItem->save();
+        } else {
+            // Crear un nuevo elemento de carrito si no está en el carrito
+            $cartItem = $trolley->shopping_cart()->create([
+                'product_id' => $product_id,
+                'stock' => 1,
+                'worth' => $product->worth
+            ]);
+        }
+		// Calcula el total dinámicamente en lugar de almacenarlo
+        $total = $trolley->shopping_cart->sum(function($item) {
+            return $item->stock * $item->worth;
+        });
 
-			$cartItem->subtotal= $cartItem->stock * $cartItem->worth;
-			$cartItem->save();
-
-			$trolley->total = $trolley->shopping_cart->sum('subtotal');
-			$trolley->save();
-
-			return redirect(route('cart.index'));
-		} catch (\Exception $e) {
-			return response()->json(['message' => 'Error al agregar producto al carrito'], 500);
-		}
-	}
+        return redirect(route('cart.index'))->with('total',$total);
+    } catch (\Exception $e) {
+        return ('Error al agregar producto al carrito: ' . $e->getMessage());
+        return response()->json(['message' => 'Error al agregar producto al carrito'], 500);
+    }
+}
 
 	public function removeFromCart(Request $request, $product_id)
 	{

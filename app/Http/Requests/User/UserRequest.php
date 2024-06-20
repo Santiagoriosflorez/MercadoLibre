@@ -12,6 +12,7 @@ class UserRequest extends FormRequest
 		return true;
 	}
 
+
 	public function rules()
 	{
 		$rules = [
@@ -25,13 +26,22 @@ class UserRequest extends FormRequest
 			array_push($rules['email'], 'unique:users,email');
 			array_push($rules['password'], 'required');
 		} else {
-			array_push($rules['email'], 'unique:users,email' . $this->user->id);
+			array_push($rules['email'], 'unique:users,email,' . $this->user->id);
 			array_push($rules['password'], 'nullable');
 		}
 
-		if($this->path() != 'api/register'){
-			$rules['role'] = ['required','string','in:user,admin'];
+		if ($this->path() != 'api/register') {
+			$rules['role'] = ['required', 'string', 'in:user,admin'];
 		}
+
 		return $rules;
+	}
+
+	public function messages()
+	{
+		return [
+			'name.required' => 'El nombre es requerido',
+			'name.string' => 'El nombre debe de ser valido',
+		];
 	}
 }

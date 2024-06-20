@@ -6,6 +6,7 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100; 1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alike+Angular&display=swap');
 
 // Variables
 @import 'variables';
@@ -25,8 +26,29 @@
 }
 
 .image {
-	height: 50%;
-	width: 50%;
+	margin: 0 40px;
+	height: 70%;
+	width: 70%;
+}
+.images {
+	position: relative;
+    top: -24px;
+    margin: 0 50px;
+    height: 45%;
+    width: 45%;
+}
+.cover-image {
+	width: 1000px;
+	height: 500px;
+}
+.body-content {
+    position: relative;
+    top: -44px;
+}
+.alike-angular-regular {
+	font-family: 'Alike Angular', serif;
+	font-weight: 400px;
+	font-style: normal;
 }
 /**  LOGIN   */
 
@@ -61,7 +83,7 @@
 
 .body {
 	padding-top: 40%;
-	background-color: white;
+	background-color: rgb(255, 255, 255);
 	top: 24.6%;
 	position: relative;
 	border-top-left-radius: 46%;
@@ -107,7 +129,7 @@
 .custom {
 	height: 300px;
 }
-.form-control {
+.form-control-login {
 	background-color: #dbdbdb;
 	display: flex;
 	margin: 0 -17px;
@@ -119,6 +141,14 @@
 
 .card_size {
 	width: 18rem;
+}
+
+.caja {
+	background-color: white;
+	position: relative;
+	width: 1080px;
+	height: 600px;
+	left: -72%;
 }
 
 .list-group-item {

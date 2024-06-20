@@ -27,14 +27,14 @@
 								<button @click="increment(item)">+</button>
 							</td>
 							<td>{{item.product.worth}}</td>
-							<td>{{itemSubtotal(item)}}</td>
+							<td>{{formatNumber(itemSubtotal(item))}}</td>
 							<td></td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<th colspan="3">Total:$ </th>
-							<th>{{cartTotal}}</th>
+							<th colspan="3">Total:</th>
+							<th>${{formatNumber(cartTotal)}}</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -74,6 +74,13 @@
 			},
 			itemSubtotal(item) {
 				return (item.stock * item.product.worth).toFixed(2)
+			},
+			formatNumber(value) {
+				if (!value) return ''
+				return parseFloat(value).toLocaleString('es-Es', {
+					minimumFractionDigits: 3,
+					maximumFractionDigits: 3
+				})
 			}
 		},
 		computed: {

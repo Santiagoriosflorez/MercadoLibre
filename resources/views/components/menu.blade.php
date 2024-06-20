@@ -1,7 +1,7 @@
 {{-- Menu --}}
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md shadow-sm" style="background-color: #B5E742">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">{{ env('APP_NAME') }}</a>
+        <a class="navbar-brand alike-angular-regular" href="{{ url('/') }}">{{ env('APP_NAME') }}</a>
 
         {{-- Haburguesa --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -24,14 +24,16 @@
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Categoria
+                                Categoría
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('product.page') }}">Calzado Deportivo</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('product.page', ['category_id' => 1]) }}">Calzado Deportivo</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('product.page') }}">Ropa Deportivo</a>
+                                    <a class="dropdown-item" href="{{ route('product.page', ['category_id' => 2]) }}">Ropa
+                                        Deportiva</a>
                                 </li>
                             </ul>
                         </div>

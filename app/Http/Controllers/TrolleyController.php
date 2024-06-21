@@ -107,7 +107,7 @@ class TrolleyController extends Controller
 
 			if ($cartItem) {
 				// Actualizar el stock del elemento del carrito
-				$cartItem->stock = $request->input('stock'); // Asumiendo que 'stock' es el campo que quieres actualizar
+				$cartItem->stock = $request->input('stock');
 				$cartItem->save();
 
 				return response()->json(['message' => 'Producto actualizado en el carrito'], 200);

@@ -27,4 +27,11 @@ class ProductController extends Controller
 		$product = Product::findOrFail($id);
 		return view('product.products', compact('product'));
 	}
+
+	public function search (Request $request)
+	{
+		$query = $request->input('query');
+		$product = Product::where('name', 'LIKE', "%$query%")->get();
+		return response()->json($product);
+	}
 }

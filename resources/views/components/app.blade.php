@@ -16,16 +16,18 @@
 </head>
 
 <body>
-    {{-- Menu --}}
-    <x-menu />
+    <div id="app">
+        {{-- Menu --}}
+        <x-menu />
 
-    <main id="app">
-        <div class="container mt-4">
-            <x-alerts />
-        </div>
+        <main>
+            <div class="container mt-4">
+                <x-alerts />
+            </div>
 
-        {{ $slot }}
-    </main>
+            {{ $slot }}
+        </main>
+    </div>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
 					<thead>
 						<tr>
 							<th scope="col">Producto</th>
-							<th scope="col">Cantidad</th>
+							<th scope="col">Cantidad</th>  
 							<th scope="col">Precio</th>
 							<th scope="col">Subtotal</th>
 							<th scope="col">Acciones</th>

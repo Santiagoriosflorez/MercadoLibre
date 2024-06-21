@@ -15,6 +15,7 @@ Auth::routes();
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 //Product
 Route::group(['prefix' => 'product'], function () {
@@ -46,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::group(['prefix' => 'category', 'controller' => CategoryController::class], function () {
 		Route::get('/', 'index')->name('category.index');
 		Route::get('/create', 'create')->name('category.create')->middleware('can:category.create');
-		Route::post('/', 'store')->name('category.store')->middleware('can:category.store');
+		Route::post('/', 'store')->name('category.store');
 		Route::get('/{user}/edit', 'edit')->name('category.edit')->middleware('can:category.edit');
 		Route::put('/{user}', 'update')->name('category.update')->middleware('can:category.update');
 		Route::delete('/{user}', 'destroy')->name('category.destroy')->middleware('can:category.destroy');

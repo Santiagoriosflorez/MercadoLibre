@@ -23,8 +23,14 @@
 								<td>{{product.stock}}</td>
 								<td>{{product.worth}}</td>
 								<td>
-									<button class="btn btn-warning">Editar</button>
-									<button class="btn btn-danger">Eliminar</button>
+									<div class="d-flex justify-content-center">
+									<button type="button" class="btn btn-warning btn-sm " @click="editProduct(product)" title="Editar">
+										<i class="fa-solid fa-pencil"></i>
+									</button>
+									<button type="button" class="btn btn-danger btn-sm ms-2 " title="Eliminar" @click="deletProduct(product)">
+										<i class="fa-solid fa-trash-can"></i>
+									</button>
+									</div>
 								</td>
 							</tr>
 						</tbody>
@@ -32,7 +38,7 @@
 				</div>
 			</div>
 			<div>
-				<category-modal :categories_data="categories_data" />
+				<category-modal :categories_data="categories_data" :category_data="category" ref="category_modal"/>
 			</div>
 		</div>
 	</section>
@@ -40,6 +46,8 @@
 
 <script>
 	import CategoryModal from './CategoryModal.vue'
+	import { successMessage,deleteMessage} from '@/helpers/Alert.js'
+
 	export default {
 		components: {
 			CategoryModal
@@ -48,7 +56,7 @@
 		data() {
 			return {
 				modal: null,
-				category: null
+				category: {}
 			}
 		},
 		mounted() {
@@ -64,20 +72,22 @@
 				this.$refs.category_modal.reset()
 				})
 			},
+			editProduct(product){
+				this.category = product
+				this.OpenModal()
+			},
+			async deletProduct({id}){
+			  if(!await deleteMessage ()) return
+				try{
+					await axios.delete(`/category/${id}`)
+					await successMessage({is_delete:true,reload:true})
+				} catch (error) {
+					console.error(error);
+				}
+			},
 			OpenModal() {
 				this.modal.show()
 			},
-
-			CloseModal() {
-				this.modal.hide()
-			},
-
-			reset() {
-				;(product = this.product),
-					(category = this.category),
-					(SaveProduct = this.saveProduct),
-					(load_category = this.load_category)
-			}
 		}
 	}
 </script>

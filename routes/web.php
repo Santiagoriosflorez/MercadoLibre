@@ -46,10 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
 	//Product and Category
 	Route::group(['prefix' => 'category', 'controller' => CategoryController::class], function () {
 		Route::get('/', 'index')->name('category.index');
-		Route::get('/create', 'create')->name('category.create')->middleware('can:category.create');
-		Route::post('/', 'store')->name('category.store');
-		Route::get('/{user}/edit', 'edit')->name('category.edit')->middleware('can:category.edit');
-		Route::put('/{user}', 'update')->name('category.update')->middleware('can:category.update');
-		Route::delete('/{user}', 'destroy')->name('category.destroy')->middleware('can:category.destroy');
+		Route::get('/show/{product}', 'show')->name('category.show');
+		Route::post('/store', 'store')->name('category.store');
+		Route::post('/update/{product}', 'update')->name('category.update');
+		// Route::put('/{product}', 'update')->name('category.update');
+		Route::delete('/{product}', 'destroy')->name('category.destroy');
 	});
 });

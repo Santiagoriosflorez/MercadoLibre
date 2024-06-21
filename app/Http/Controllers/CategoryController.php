@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\category\CategoryRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\category\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -15,37 +17,46 @@ class CategoryController extends Controller
 		$product = Product::with('Category')->get();
 		return view('category.index', compact('product', 'categories'));
 	}
-	public function create()
-	{
-		//
-	}
+
+
 	public function store(CategoryRequest $request)
-	{
-		// Crear un nuevo producto
-		$product = new Product();
+    {
+        // Crear un nuevo producto
+        $product = new Product($request->only(['name', 'category_id', 'stock', 'worth']));
 
-		// Asignar directamente los valores del request
-		$product->name = $request->input('name');
-		$product->category_id = $request->input('category_id');
-		$product->stock = $request->input('stock');
-		$product->worth = $request->input('worth');
+        // Guardar la imagen si se proporciona
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store('images/product');
+            $product->url_image = $path;
+        }
 
-		// Guardar el producto en la base de datos
-		$product->save();
+        // Guardar el producto en la base de datos
+        $product->save();
 
-		return response()->json(['message' => 'Producto creado con éxito'], 200);
-	}
+        return response()->json(['message' => 'Producto creado con éxito'], 200);
+    }
 
 	public function show(Product $product,)
 	{
-		return response()->json(['product'=>'product'],204);
+		return response()->json(['product'=> $product],204);
 	}
 
 	public function update(CategoryRequest $request, Product $product)
 	{
-		$product->update($request->all());
-		return response()->json([],204);
+		$product->update($request->only(['name', 'category_id', 'stock', 'worth']));
+
+		if ($request->hasFile('file')) {
+			if($product->url_image){
+				Storage::delete($product->url_imagen);
+			}
+
+			$path = $request->file('file')->store('images/product');
+			$product->url_imagen = $path;
+			$product->save();
+		}
+		return response()->json([], 204);
 	}
+
 	public function destroy(product $product)
 	{
 		$product->delete();

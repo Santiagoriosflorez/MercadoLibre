@@ -17,9 +17,10 @@ return new class extends Migration
 			$table->id();
 			$table->bigInteger('category_id')->unsigned();
 			$table->string('name');
-			$table->text('description');
+			$table->text('description')->unsigned()->change();
 			$table->decimal('worth' , 8,3);
 			$table->integer('stock');
+			$table->string('url_imagen')->unsigned()->change();
             $table->timestamps();
             $table->softDeletes();
 

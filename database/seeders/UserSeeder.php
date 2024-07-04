@@ -18,6 +18,6 @@ class UserSeeder extends Seeder
 			'remember_token' => Str::random(10),
 		]);
 		$user->save();
-		// $user->assignRole('admin');
+		$user->assignRole('admin');
 	}
 }
